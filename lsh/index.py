@@ -76,6 +76,8 @@ class Index(object):
         if self.docinfo_lsh is not None:
             for docinfo in docinfo_list:
                 self.docinfo_list.append(bitarray(docinfo))
+        else:
+            self.docinfo_list = docinfo_list
         self.docid_list = np.load(input + '.docid.npy')
         assert len(self.docinfo_list) == self.docid_list.shape[0]
         self.doc_num = self.docid_list.shape[0]
