@@ -15,7 +15,7 @@ class Index(object):
         self.doc_num = 0
 
     def index(self, input_list, docid):
-        key_set = self.lsh.hash(input_list)
+        key_set = set(self.lsh.hash(input_list))
         for key in key_set:
             self.index_dict.setdefault( key, set() )
             self.index_dict[key].add(self.doc_num)
@@ -36,7 +36,7 @@ class Index(object):
             query_docinfo = bitarray(''.join(self.docinfo_lsh.hash(input_list)))
             
         rs_dict = {}
-        query_key_set = self.lsh.hash(input_list)
+        query_key_set = set(self.lsh.hash(input_list))
         for query_key in query_key_set:
             for k in LSH.get_keys_str(query_key, dist=key_dist):
                 if k in self.index_dict:

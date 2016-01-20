@@ -61,12 +61,12 @@ class ITQLSH(LSH):
         '''
         Hash input_list to n_bit of binarys.
         '''
-        bits_set = set()
+        bits_list = []
         for pca_arr, R in zip(self.pca_list, self.R_list):
             B = np.dot(np.dot(np.array(input_list), pca_arr), R)
             key = ''.join(['1' if e > 0 else '0' for e in B])
-            bits_set.add(key)
-        return bits_set
+            bits_list.append(key)
+        return bits_list
 
     def save(self, output):
         '''

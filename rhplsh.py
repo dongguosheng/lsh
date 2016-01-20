@@ -23,18 +23,18 @@ class RHPLSH(LSH):
         self.planes = self.planes.reshape(self.n_table, self.n_bit, self.n_dim)
 
     def hash(self, input_list):
-        bits_set = set()
+        bits_list = []
         for plane in self.planes:
             # print plane.shape
             # print np.array(input_list).shape
             projection = np.dot(plane, np.array(input_list))
-            bits_set.add(''.join(['1' if e > 0 else '0' for e in projection]))
-        return bits_set
+            bits_list.append(''.join(['1' if e > 0 else '0' for e in projection]))
+        return bits_list
 
     def dist(self, input_list1, input_list2):
-        bits_set1 = self.hash(input_list1)
-        bits_set2 = self.hash(input_list2)
-        return sum([self.hamming_dist_str(bits_arr1, bits_arr2) for bits_arr1, bits_arr2 in zip(bits_set1, bits_set2)]) / float(self.n_table)
+        bits_list1 = self.hash(input_list1)
+        bits_list2 = self.hash(input_list2)
+        return sum([self.hamming_dist_str(bits_arr1, bits_arr2) for bits_arr1, bits_arr2 in zip(bits_list1, bits_list2)]) / float(self.n_table)
 
     def save(self, output):
         '''
