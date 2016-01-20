@@ -12,8 +12,9 @@ an alternative to index large scale high dimensional data.
     from lsh.index import Index
     
     w2v = models.Word2Vec.load('./w2v_model/word2vec.model')
-    lsh = RHPLSH(20, 200, n_table=5)
-    w2v_index = Index(lsh)
+    rhplsh = RHPLSH(20, 200, n_table=5)
+    rhplsh.init_hyperplanes()
+    w2v_index = Index(rhplsh)
     
     now = datetime.now()
     cnt = 0
@@ -25,4 +26,9 @@ an alternative to index large scale high dimensional data.
     
     w2v_index.save('w2v')
 
-Three files will be generated: w2v.index, w2v.docinfo, w2v.docid.
+    # Four files will be generated: `w2v.index`, `w2v.docinfo`, `w2v.docid`, `w2v.planes`
+
+    w2v_index.load('w2v')
+    w = 'xx'
+    rs_list, recall_num = w2v_index.query(w2v[w], key_dist=1, dist=LSH.cosine_dist)
+
