@@ -68,6 +68,11 @@ class ITQLSH(LSH):
             bits_list.append(key)
         return bits_list
 
+    def dist(self, input_list1, input_list2):
+        bits_list1 = self.hash(input_list1)
+        bits_list2 = self.hash(input_list2)
+        return sum([self.hamming_dist_str(bits_arr1, bits_arr2) for bits_arr1, bits_arr2 in zip(bits_list1, bits_list2)]) / float(self.n_table)
+
     def save(self, output):
         '''
         Save PCA-ITQ params.
