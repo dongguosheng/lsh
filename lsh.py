@@ -27,11 +27,9 @@ class LSH(object):
             tmp_list = list(bits_str)
             if bits_str[i] == '0':
                 tmp_list[i] = '1'
-                bits_str = ''.join(tmp_list)
             else:
                 tmp_list[i] = '0'
-                bits_str = ''.join(tmp_list)
-            bits_list.append(bits_str)
+            bits_list.append(''.join(tmp_list))
         return bits_list
 
     @staticmethod
