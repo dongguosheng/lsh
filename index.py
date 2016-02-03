@@ -36,16 +36,22 @@ class Index(object):
             query_docinfo = bitarray(''.join(self.docinfo_lsh.hash(input_list)))
             
         rs_dict = {}
-        query_key_set = set(self.lsh.hash(input_list))
-        for query_key in query_key_set:
-            for k in LSH.get_keys_str(query_key, dist=key_dist):
-                if k in self.index_dict:
-                    for idx in self.index_dict[k]:
-                        if idx in rs_dict:
-                            continue
-                        dist = dist_func(self.docinfo_list[idx], query_docinfo)
-                        docid = self.docid_list[idx]
-                        rs_dict[docid] = dist
+        if key_dist >= 0:
+            query_key_set = set(self.lsh.hash(input_list))
+            for query_key in query_key_set:
+                for k in LSH.get_keys_str(query_key, dist=key_dist):
+                    if k in self.index_dict:
+                        for idx in self.index_dict[k]:
+                            if idx in rs_dict:
+                                continue
+                            dist = dist_func(self.docinfo_list[idx], query_docinfo)
+                            docid = self.docid_list[idx]
+                            rs_dict[docid] = dist
+        else:
+            # brute force search
+            for docid, docinfo in zip(self.docid_list, self.docinfo_list):
+                dist = dist_func(docinfo, query_docinfo)
+                rs_dict[docid] = dist
         print 'Candidates: %d' % len(rs_dict)
         return (sorted(rs_dict.items(), key=itemgetter(1), reverse=False)[: topk], len(rs_dict))
 
