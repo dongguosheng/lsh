@@ -47,10 +47,10 @@ class ITQLSH(LSH):
             sample_arr = arr[index, :]
             self.pca(arr)
             R = np.random.normal(self.n_bit, self.n_bit)
+            V = np.dot(sample_arr, self.pca_list[-1])
             for j in range(self.n_iter):
                 if (i + j + 1) % 25 == 0:
                     print '*',
-                V = np.dot(sample_arr, self.pca_list[-1])
                 B = np.sign(np.dot(V, R))
                 U, _, V = la.svd(np.dot(B.T, V))
                 R = np.dot(V.T, U.T)    # transpose V or not?
