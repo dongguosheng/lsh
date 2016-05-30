@@ -49,8 +49,9 @@ class ITQLSH(LSH):
             R = np.random.normal(self.n_bit, self.n_bit)
             V = np.dot(sample_arr, self.pca_list[-1])
             for j in range(self.n_iter):
-                if (i + j + 1) % 25 == 0:
-                    print '*',
+                print_str = '%d(%d), table %d\r' % (j+1, n_iter, i+1)
+                sys.stdout.write(print_str)
+                sys.stdout.flush()
                 B = np.sign(np.dot(V, R))
                 U, _, V = la.svd(np.dot(B.T, V))
                 R = np.dot(V.T, U.T)    # transpose V or not?
