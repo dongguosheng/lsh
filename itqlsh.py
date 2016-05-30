@@ -10,6 +10,7 @@ import numpy as np
 from numpy import linalg as la
 from operator import itemgetter
 from lsh import LSH
+import sys
 
 class ITQLSH(LSH):
     def __init__(self, n_bit, n_dim, n_table=5, sample_rate=0.025, n_iter=50):
