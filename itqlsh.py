@@ -95,5 +95,37 @@ class ITQLSH(LSH):
         print self
         print 'load complete.'
 
+    def load_txt(self, input):
+        '''
+        Load From Txt File.
+        '''
+        # TODO:
+        with open(input) as fin:
+            head = fin.next()
+            self.n_bit, self.n_dim, self.n_table, self.sample_rate, self.n_iter = head.rstrip().split()
+            self.n_bit = int(self.n_bit)
+            self.n_dim = int(self.n_dim)
+            self.n_table = int(self.n_table)
+            self.sample_rate = float(self.sample_rate)
+            self.n_iter = int(self.n_iter)
+            # load pca mat
+            n_row = 0
+            tmp_list = []
+            while n_row < self.n_dim * self.n_table:
+                line = fin.next()
+                tmp_list.extend([float(e) for e in line.rstrip().split()])
+                n_row += 1
+            self.pca_list = np.array(tmp_list).reshape(self.n_table, self.n_dim, self.n_bit)
+            # load r mat
+            n_row = 0
+            tmp_list = []
+            while n_row < self.n_bit * self.n_table:
+                line = fin.next()
+                tmp_list.extend([float(e) for e in line.rstrip().split()])
+                n_row += 1
+            self.R_list = np.array(tmp_list).reshape(self.n_table, self.n_dim, self.n_bit)
+            print self
+            print 'load txt model complete.'
+
     def __str__(self):
         return 'n_bit: %d, n_dim: %d, n_table: %d, sample_rate: %f, n_iter: %d' % (self.n_bit, self.n_dim, self.n_table, self.sample_rate, self.n_iter)
