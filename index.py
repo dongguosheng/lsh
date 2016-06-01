@@ -40,7 +40,7 @@ class Index(object):
         if key_dist >= 0:
             query_key_list = self.lsh.hash(input_list)
             for i, query_key in enumerate(query_key_list):
-                for k in LSH.get_keys_str(query_key, dist=key_dist):
+                for k in LSH.get_keys_str(query_key, key_dist):
                     k += ('_' + str(i))
                     if k in self.index_dict:
                         for idx in self.index_dict[k]:
