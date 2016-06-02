@@ -50,7 +50,7 @@ class ITQLSH(LSH):
             R = np.random.normal(self.n_bit, self.n_bit)
             V = np.dot(sample_arr, self.pca_list[-1])
             for j in range(self.n_iter):
-                print_str = '%d(%d), table %d\r' % (j+1, n_iter, i+1)
+                print_str = '%d(%d), table %d\r' % (j+1, self.n_iter, i+1)
                 sys.stdout.write(print_str)
                 sys.stdout.flush()
                 B = np.sign(np.dot(V, R))
