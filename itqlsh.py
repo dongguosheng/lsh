@@ -123,7 +123,7 @@ class ITQLSH(LSH):
                 line = fin.next()
                 tmp_list.extend([float(e) for e in line.rstrip().split()])
                 n_row += 1
-            self.R_list = np.array(tmp_list).reshape(self.n_table, self.n_dim, self.n_bit)
+            self.R_list = np.array(tmp_list).reshape(self.n_table, self.n_bit, self.n_bit)
             print self
             print 'load txt model complete.'
 
