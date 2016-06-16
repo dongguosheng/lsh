@@ -68,9 +68,9 @@ class Index(object):
         # save docid and docinfo
         np.save(output + '.docinfo', self.docinfo_list)
         np.save(output + '.docid', np.array(self.docid_list, dtype='uint64'))
-        self.lsh.save(output)
+        self.lsh.save(output + '_index')
         if self.docinfo_lsh is not None:
-            self.docinfo_lsh.save(output)
+            self.docinfo_lsh.save(output + '_docinfo')
 
     def load(self, input):
         # load index from text file
@@ -90,9 +90,9 @@ class Index(object):
         assert len(self.docinfo_list) == self.docid_list.shape[0]
         self.doc_num = self.docid_list.shape[0]
         # load lsh
-        self.lsh.load(input)
+        self.lsh.load(input + '_index')
         if self.docinfo_lsh is not None:
-            self.docinfo_lsh.load(input)
+            self.docinfo_lsh.load(input + '_docinfo')
         print self
 
     def __str__(self):
