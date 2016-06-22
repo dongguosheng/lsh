@@ -25,8 +25,6 @@ class RHPLSH(LSH):
     def hash(self, input_list):
         bits_list = []
         for plane in self.planes:
-            # print plane.shape
-            # print np.array(input_list).shape
             projection = np.dot(plane, np.array(input_list))
             bits_list.append(''.join(['1' if e > 0 else '0' for e in projection]))
         return bits_list

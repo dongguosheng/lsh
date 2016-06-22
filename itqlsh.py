@@ -99,7 +99,6 @@ class ITQLSH(LSH):
         '''
         Load From Txt File.
         '''
-        # TODO:
         with open(input) as fin:
             head = fin.next()
             self.n_bit, self.n_dim, self.n_table, self.sample_rate, self.n_iter = head.rstrip().split()
