@@ -27,9 +27,9 @@ an alternative to index large scale high dimensional data.
     w2v_index.save('w2v')   # Four files will be generated: `w2v.index`, `w2v.docinfo`, `w2v.docid`, `w2v.planes`
     w2v_index.load('w2v')
     w = 'word'
-    rs_list, recall_num = w2v_index.query(w2v[w], key_dist=1, dist=LSH.cosine_dist)
+    rs_list, recall_num = w2v_index.query(w2v[w], topk=30, key_dist=1, dist_func=LSH.cosine_dist)
     print 'query: %s' % w
     print 'recall num: %d' % recall_num
-    for word, dist in rs_list:
-        print word, dist
+    for word_id, dist in rs_list:
+        print w2v.index2word[word_id], dist
 
