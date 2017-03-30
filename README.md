@@ -15,7 +15,7 @@ an alternative to index large scale high dimensional data.
     n_bit = 20
     n_dim = 200
     n_table = 5
-    rhplsh = RHPLSH(n_bit, n_dim, n_table=n_table)
+    rhplsh = RHPLSH(n_bit=n_bit, n_dim=n_dim, n_table=n_table)
     rhplsh.init_hyperplane()
     w2v_index = Index(rhplsh)
     now = datetime.now()
