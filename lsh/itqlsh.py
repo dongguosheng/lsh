@@ -13,7 +13,7 @@ from lsh import LSH
 import sys
 
 class ITQLSH(LSH):
-    def __init__(self, n_bit, n_dim, n_table=5, sample_rate=0.025, n_iter=50):
+    def __init__(self, n_bit=0, n_dim=0, n_table=5, sample_rate=0.025, n_iter=50):
         self.n_bit = n_bit
         self.n_dim = n_dim
         self.n_table = n_table
@@ -41,6 +41,8 @@ class ITQLSH(LSH):
         '''
         if not isinstance(arr, np.ndarray):
             raise Exception("arr type is %s, arr must be numpy.ndarray." % str(type(arr)))
+        if self.n_bit <= 0 or self.n_dim <= 0:
+            raise Exception("n_bit: %d, n_dim: %d\n" % (self.n_bit, self.n_dim))
         n_sample = int(arr.shape[0] * self.sample_rate)
         print 'Sample Num: %d' % n_sample
         for i in range(self.n_table):

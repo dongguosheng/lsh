@@ -10,13 +10,15 @@ from lsh import LSH
 from bitarray import bitarray
 
 class RHPLSH(LSH):
-    def __init__(self, n_bit, n_dim, n_table=5):
+    def __init__(self, n_bit=0, n_dim=0, n_table=5):
         self.n_dim = n_dim
         self.n_bit = n_bit
         self.n_table = n_table
         self.planes = ''
 
     def init_hyperplane(self):
+        if self.n_bit <= 0 or self.n_dim <= 0:
+            raise Exception("n_bit: %d, n_dim: %d\n" % (self.n_bit, self.n_dim))
         self.planes = np.array([])
         for i in range(self.n_table):
             self.planes = np.append(self.planes, np.random.randn(self.n_bit, self.n_dim))
