@@ -85,6 +85,20 @@ class ITQLSH(LSH):
         np.save(output + '.R', self.R_list)
         print 'save complete.'
 
+    def save_txt(self, output):
+        '''
+        Save PCA-ITQ params with text format.
+        '''
+        with open(output, 'w') as fout:
+            fout.write('%s %s %s %s %s\n' % (self.n_bit, self.n_dim, self.n_table, self.sample_rate, self.n_iter))
+            for pca_mat in self.pca_list:
+                for vec in pca_mat:
+                    fout.write(' '.join(str(e) for e in vec) + '\n')
+            for r_mat in self.R_list:
+                for vec in r_mat:
+                    fout.write(' '.join(str(e) for e in vec) + '\n')
+        print 'save txt complete.'
+
     def load(self, input):
         '''
         '''
