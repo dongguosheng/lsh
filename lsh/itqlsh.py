@@ -49,7 +49,8 @@ class ITQLSH(LSH):
             index = np.random.choice(arr.shape[0], n_sample, replace=False)
             sample_arr = arr[index, :]
             self.pca(arr)
-            R = np.random.normal(self.n_bit, self.n_bit)
+            R = np.random.randn(self.n_bit, self.n_bit)
+            R, _ = np.linalg.qr(R)  # get orthogonal matrix
             V = np.dot(sample_arr, self.pca_list[-1])
             for j in range(self.n_iter):
                 print_str = '%d(%d), table %d\r' % (j+1, self.n_iter, i+1)
