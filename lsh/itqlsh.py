@@ -44,7 +44,7 @@ class ITQLSH(LSH):
         if self.n_bit <= 0 or self.n_dim <= 0:
             raise Exception("n_bit: %d, n_dim: %d\n" % (self.n_bit, self.n_dim))
         n_sample = int(arr.shape[0] * self.sample_rate)
-        print 'Sample Num: %d' % n_sample
+        print('Sample Num: %d' % n_sample)
         for i in range(self.n_table):
             index = np.random.choice(arr.shape[0], n_sample, replace=False)
             sample_arr = arr[index, :]
@@ -60,7 +60,7 @@ class ITQLSH(LSH):
                 U, _, V = la.svd(np.dot(B.T, V))
                 R = np.dot(V.T, U.T)    # transpose V or not?
             self.R_list.append(R)
-        print '\ntrain complete.'
+        print('\ntrain complete.')
 
     def hash(self, input_list):
         '''
@@ -84,7 +84,7 @@ class ITQLSH(LSH):
         '''
         np.save(output + '.pca', self.pca_list)
         np.save(output + '.R', self.R_list)
-        print 'save complete.'
+        print('save complete.')
 
     def save_txt(self, output):
         '''
@@ -98,7 +98,7 @@ class ITQLSH(LSH):
             for r_mat in self.R_list:
                 for vec in r_mat:
                     fout.write(' '.join(str(e) for e in vec) + '\n')
-        print 'save txt complete.'
+        print('save txt complete.')
 
     def load(self, input):
         '''
@@ -110,7 +110,7 @@ class ITQLSH(LSH):
         self.n_dim = self.pca_list.shape[1]
         self.n_table = self.pca_list.shape[0]
         print self
-        print 'load complete.'
+        print('load complete.')
 
     def load_txt(self, input):
         '''
@@ -141,7 +141,7 @@ class ITQLSH(LSH):
                 n_row += 1
             self.R_list = np.array(tmp_list).reshape(self.n_table, self.n_bit, self.n_bit)
             print self
-            print 'load txt model complete.'
+            print('load txt model complete.')
 
     def __str__(self):
         return 'n_bit: %d, n_dim: %d, n_table: %d, sample_rate: %f, n_iter: %d' % (self.n_bit, self.n_dim, self.n_table, self.sample_rate, self.n_iter)
