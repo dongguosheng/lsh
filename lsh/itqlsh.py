@@ -109,7 +109,7 @@ class ITQLSH(LSH):
         self.n_bit = self.R_list.shape[2]
         self.n_dim = self.pca_list.shape[1]
         self.n_table = self.pca_list.shape[0]
-        print self
+        print(self)
         print('load complete.')
 
     def load_txt(self, input):
