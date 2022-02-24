@@ -54,7 +54,7 @@ class Index(object):
             for docid, docinfo in zip(self.docid_list, self.docinfo_list):
                 dist = dist_func(docinfo, query_docinfo)
                 rs_dict[docid] = dist
-        print 'Candidates: %d' % len(rs_dict)
+        print('Candidates: %d' % len(rs_dict))
         return (sorted(rs_dict.items(), key=itemgetter(1), reverse=False)[: topk], len(rs_dict))
 
     def save(self, output):
@@ -93,7 +93,7 @@ class Index(object):
         self.lsh.load(input + '_index')
         if self.docinfo_lsh is not None:
             self.docinfo_lsh.load(input + '_docinfo')
-        print self
+        print(self)
 
     def __str__(self):
         return 'index bit num: %d, index dict size: %d, doc_num: %d' % (self.lsh.n_bit, len(self.index_dict), self.doc_num)
