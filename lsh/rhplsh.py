@@ -6,7 +6,7 @@ Charikar, M. S. 2002. Similarity estimation techniques from rounding algorithms.
 '''
 
 import numpy as np
-from lsh import LSH
+from lsh.lsh import LSH
 from bitarray import bitarray
 
 class RHPLSH(LSH):
