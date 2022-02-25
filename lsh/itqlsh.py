@@ -9,7 +9,7 @@ Yeqing Li, Chen Chen. 2014. Sub-Selective Quantization for Large-Scale Image Sea
 import numpy as np
 from numpy import linalg as la
 from operator import itemgetter
-from lsh import LSH
+from lsh.lsh import LSH
 import sys
 
 class ITQLSH(LSH):
