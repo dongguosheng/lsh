@@ -1,7 +1,7 @@
 # -*- coding: gbk -*-
 
 import numpy as np
-from lsh import LSH
+from lsh.lsh import LSH
 from bitarray import bitarray
 from operator import itemgetter
 
