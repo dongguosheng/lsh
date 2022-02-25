@@ -35,7 +35,7 @@ class LSH(object):
     @staticmethod
     def hamming_dist_str(bits_str1, bits_str2):
         if len(bits_str1) != len(bits_str2):
-            print 'length not equal!'
+            print('length not equal!')
             return -1
         return sum([0 if i == j else 1 for i, j in zip(bits_str1, bits_str2)])
 
